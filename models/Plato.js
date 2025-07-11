@@ -1,0 +1,40 @@
+// food-menu-api/models/Plato.js
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
+
+const Plato = sequelize.define(
+  "Plato",
+  {
+    id_plato: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    id_categoria: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    nombre: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    descripcion: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    precio: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    disponible: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+  },
+  {
+    tableName: "plato",
+    timestamps: false,
+  }
+);
+
+module.exports = Plato;

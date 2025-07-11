@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log
+.env
+uploads/
+*.log
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.vscode/
+
+# Producción
+build/
+dist/
+public/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Credenciales y archivos de configuración sensibles
+# Se recomienda encarecidamente NO subir archivos .env o con credenciales a repositorios públicos
+# Las variables de entorno deben manejarse con un servicio como dotenv en producción
+# o a través de la configuración del entorno del servidor.
+
+# Historial de comandos del shell (si usas herramientas como bash o zsh)
+.history
+
+# Archivos de copia de seguridad
+*.bak
+*.swp
+*~
