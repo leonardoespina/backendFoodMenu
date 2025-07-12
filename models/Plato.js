@@ -30,6 +30,11 @@ const Plato = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
+    imagen_url: {
+      // <-- Nuevo campo para la URL de la imagen
+      type: DataTypes.STRING(255),
+      allowNull: true, // Puede ser null si no tiene imagen
+    },
   },
   {
     tableName: "plato",

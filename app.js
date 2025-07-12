@@ -5,16 +5,20 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const sequelize = require("./config/database");
 const models = require("./models");
+const path = require("path"); // Importar path para resolver rutas
 
 // Importar rutas
 const authRoutes = require("./routes/authRoutes");
 const categoriaRoutes = require("./routes/categoriaRoutes");
 const platoRoutes = require("./routes/platoRoutes");
-const empresaRoutes = require("./routes/empresaRoutes"); // Nueva
-const pedidoRoutes = require("./routes/pedidoRoutes"); // Nueva
+const empresaRoutes = require("./routes/empresaRoutes");
+const pedidoRoutes = require("./routes/pedidoRoutes");
 
 // Middleware para parsear JSON
 app.use(express.json());
+
+// --- Servir archivos estáticos (imágenes) ---
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Las imágenes estarán en http://localhost:3000/uploads/nombre_del_archivo.jpg
 
 // Sincronizar modelos con la base de datos
 sequelize
@@ -36,8 +40,8 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/categorias", categoriaRoutes);
 app.use("/api/platos", platoRoutes);
-app.use("/api/empresa", empresaRoutes); // Prefijo '/api/empresa'
-app.use("/api/pedidos", pedidoRoutes); // Prefijo '/api/pedidos'
+app.use("/api/empresa", empresaRoutes);
+app.use("/api/pedidos", pedidoRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
