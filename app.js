@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 const sequelize = require("./config/database");
 const models = require("./models");
@@ -13,6 +14,8 @@ const categoriaRoutes = require("./routes/categoriaRoutes");
 const platoRoutes = require("./routes/platoRoutes");
 const empresaRoutes = require("./routes/empresaRoutes");
 const pedidoRoutes = require("./routes/pedidoRoutes");
+
+app.use(cors());
 
 // Middleware para parsear JSON
 app.use(express.json());
