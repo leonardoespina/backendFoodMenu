@@ -14,6 +14,7 @@ const categoriaRoutes = require("./routes/categoriaRoutes");
 const platoRoutes = require("./routes/platoRoutes");
 const empresaRoutes = require("./routes/empresaRoutes");
 const pedidoRoutes = require("./routes/pedidoRoutes");
+const usuarioRoutes = require("./routes/usuarioRoutes");
 
 app.use(cors());
 
@@ -45,6 +46,7 @@ app.use("/api/categorias", categoriaRoutes);
 app.use("/api/platos", platoRoutes);
 app.use("/api/empresa", empresaRoutes);
 app.use("/api/pedidos", pedidoRoutes);
+app.use("/api/usuarios", usuarioRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {

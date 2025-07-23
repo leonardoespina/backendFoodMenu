@@ -1,41 +1,43 @@
 // food-menu-api/models/Usuario.js
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
-
-const Usuario = sequelize.define(
-  "Usuario",
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Usuario = sequelize.define("Usuario", {
     id_usuario: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     nombre: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    telefono: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
+      validate: {
+        isEmail: true,
+      },
     },
     clave: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    tipo: {
-      type: DataTypes.ENUM("admin", "cliente"),
-      defaultValue: "cliente",
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     },
-  },
-  {
-    tableName: "usuario",
-    timestamps: false,
-  }
-);
+    tipo: {
+      type: DataTypes.STRING,
+      defaultValue: "usuario", // o 'admin'
+    },
+  });
 
-module.exports = Usuario;
+  Usuario.associate = (models) => {
+    Usuario.hasMany(models.Pedido, {
+      foreignKey: "id_usuario",
+      sourceKey: "id_usuario",
+    });
+  };
+
+  return Usuario;
+};

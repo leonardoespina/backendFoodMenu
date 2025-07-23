@@ -1,7 +1,10 @@
 {
   "folders": [
-	{
-		"path": "."
-	}
-]
+    {
+      "path": "."
+    },
+    {
+      "path": "../Users/Pc/Documents/flutter_device/esperanza/flutter_application_1"
+    }
+  ]
 }

@@ -1,24 +1,26 @@
 // food-menu-api/models/Categoria.js
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
-
-const Categoria = sequelize.define(
-  "Categoria",
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Categoria = sequelize.define("Categoria", {
     id_categoria: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     nombre: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING,
       allowNull: false,
     },
-  },
-  {
-    tableName: "categoria", // Asegúrate de que el nombre de la tabla coincida
-    timestamps: false, // No queremos `createdAt` y `updatedAt` para esta tabla
-  }
-);
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+  });
 
-module.exports = Categoria;
+  Categoria.associate = (models) => {
+    Categoria.hasMany(models.Plato, {
+      foreignKey: "id_categoria",
+    });
+  };
+
+  return Categoria;
+};

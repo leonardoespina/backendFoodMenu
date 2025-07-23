@@ -2,13 +2,13 @@
 const express = require("express");
 const router = express.Router();
 const categoriaController = require("../controllers/categoriaController");
-const { protect, authorize } = require("../middleware/auth"); // Importar middlewares
+const { protect, authorize } = require("../middleware/auth");
 
-// Rutas públicas (cualquier usuario, incluso no autenticado, puede ver las categorías)
+// Rutas públicas
 router.get("/", categoriaController.getAllCategorias);
 router.get("/:id", categoriaController.getCategoriaById);
 
-// Rutas protegidas (solo para administradores)
+// Rutas protegidas (solo admin)
 router.post(
   "/",
   protect,
@@ -26,6 +26,14 @@ router.delete(
   protect,
   authorize("admin"),
   categoriaController.deleteCategoria
+);
+
+// Opcional: Ruta para reactivar categoría
+router.patch(
+  "/:id/activate",
+  protect,
+  authorize("admin"),
+  categoriaController.activateCategoria
 );
 
 module.exports = router;
